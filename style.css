@@ -66,7 +66,6 @@ img {
 #header ul li {
     float: left;
     padding-right: 2px;
-    background: url(images/divider.gif) no-repeat right 0;
 }
 
 #header ul li a {
@@ -107,7 +106,7 @@ img {
 
 /** BEGIN body **/
 #body {
-    background: #ffffff url(images/body.gif) repeat-y right 0;
+    background: #ffffff url(images/body.gif) repeat-x right 0;
 }
 
 /** END body **/
