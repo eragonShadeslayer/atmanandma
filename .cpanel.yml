@@ -3,6 +3,8 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/atmaaici/public_html/
     - /bin/cp *.html $DEPLOYPATH
+    - /bin/cp *.js $DEPLOYPATH
+    - /bin/cp *.css $DEPLOYPATH
     - /bin/cp -R images $DEPLOYPATH
     - /bin/cp -R css $DEPLOYPATH
     - /bin/cp -R js $DEPLOYPATH
