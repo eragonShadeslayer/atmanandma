@@ -1,23 +1,54 @@
-function footer() {
+function addProfilePanel() {
+    let profilePanel = document.getElementById('profilePanel');
+    let imageContainer = createElementAndAppend({
+        tagName: "div",
+        className: "thumb",
+        parentNode: profilePanel
+    });
+    let image = createElementAndAppend({
+        tagName: "img",
+        src: "images/photo.jpg",
+        parentNode: imageContainer
+    });
+    let textContainer = createElementAndAppend({
+        tagName: "div",
+        className: "text",
+        parentNode: profilePanel
+    });
+    let textHeader = createElementAndAppend({
+        tagName: "h2",
+        innerText: PersonalData.Name,
+        parentNode: textContainer
+    });
+    let textContent = createElementAndAppend({
+        tagName: "p",
+        innerHTML: PersonalData.PreviousPosition +
+            "<br>" + PersonalData.Position +
+            "<br>" + PersonalData.Organisation,
+        parentNode: textContainer
+    });
+}
+
+function addFooter() {
     let footerContainer = document.getElementById('footer');
     let header = createElementAndAppend({
         tagName: "h2",
-        innerText: footerData.Title,
+        innerText: PersonalData.Title,
         parentNode: footerContainer
     });
     let footerInfo = createElementAndAppend({
         tagName: "p",
-        innerHTML: footerData.Name +
-            "<br>" + footerData.Position +
-            "<br>" + footerData.Organisation +
-            "<br> Ph:" + footerData.Phone +
-            "<br><a href='mailto:" + footerData.Email + "'> Email:" + footerData.Email + "</a>",
+        innerHTML: PersonalData.Name +
+            "<br>" + PersonalData.Position +
+            "<br>" + PersonalData.Organisation +
+            "<br> Ph:" + PersonalData.Phone +
+            "<br><a href='mailto:" + PersonalData.Email + "'> Email:" + PersonalData.Email + "</a>",
         parentNode: footerContainer
     });
     let socialMediaContainer = createElementAndAppend({
         tagName: "center",
-        innerHTML: "<a target='_blank' href='https://twitter.com/" + footerData.TwitterHandle + "' class='fa fa-twitter'></a>" +
-            "<a target='_blank' href='http://www.linkedin.com/in/" + footerData.LinkedInHandle + "' class='fa fa-linkedin'></a>",
+        innerHTML: "<a target='_blank' href='https://twitter.com/" + PersonalData.TwitterHandle + "' class='fa fa-twitter'></a>" +
+            "<a target='_blank' href='http://www.linkedin.com/in/" + PersonalData.LinkedInHandle + "' class='fa fa-linkedin'></a>",
         parentNode: footerContainer
     })
 }
@@ -70,5 +101,6 @@ window.addEventListener('load', onLoad);
 
 
 function onLoad() {
-    footer();
+    addProfilePanel();
+    addFooter();
 }

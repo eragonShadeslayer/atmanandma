@@ -111,39 +111,32 @@ img {
 
 /** END body **/
 
-/** BEGIN content **/
-#content {
-    width: 630px;
+/** BEGIN profilePanel **/
+#profilePanel {
+    margin: 20px 40px;
+    position: relative;
+    width: 550px;
+    height: 284px;
     float: left;
-
 }
 
-#content p {
+#profilePanel p {
     margin-bottom: 10px;
     line-height: 1.2em;
 }
 
-#content .latest {
-    margin: 20px 40px;
-    position: relative;
-    width: 550px;
-    height: 300px;
-}
-
-#content .latest .thumb {
+#profilePanel .thumb {
     height: 300px;
     overflow: hidden;
-
 }
 
-#content .latest .thumb img {
+#profilePanel .thumb img {
     width: 550px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
-
 }
 
-#content .latest .text {
+#profilePanel .text {
     color: #ffffff;
     padding: 15px 15px 20px;
     position: absolute;
@@ -152,10 +145,9 @@ img {
     width: 520px;
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.5);
-
 }
 
-#content .latest .text h2 {
+#profilePanel .text h2 {
     font-size: 1.4em;
     font-weight: bold;
     margin-bottom: 5px;
@@ -163,7 +155,7 @@ img {
     text-shadow: 2px 2px 5px brown;
 }
 
-#content .latest .text p {
+#profilePanel .text p {
     font-size: 1.2em;
     font-weight: normal;
     margin-bottom: 5px;
@@ -204,7 +196,7 @@ img {
     margin-left: 19px;
 }
 
-/** END content **/
+/** END profilePanel **/
 /******* begin talks - video *******/
 table {
     width: 100%;
