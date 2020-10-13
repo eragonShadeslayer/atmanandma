@@ -22,11 +22,104 @@ function addProfilePanel() {
     });
     let textContent = createElementAndAppend({
         tagName: "p",
-        innerHTML: PersonalData.PreviousPosition +
-            "<br>" + PersonalData.Position +
-            "<br>" + PersonalData.Organisation,
+        innerHTML: PersonalData.CurrentPosition +
+            "<br>" + PersonalData.PreviousPosition +
+            "<br>" + PersonalData.OtherRoles,
         parentNode: textContainer
     });
+}
+
+function addHeaderPanel() {
+    let headerContainer = document.getElementById('header');
+    let listContainer = createElementAndAppend({
+        tagName: "ul",
+        parentNode: headerContainer
+    });
+    let items = [
+        {
+            Name: "Home",
+            Link: "index.html"
+        },
+        {
+            Name: "National Roles",
+            Link: "roles.html"
+        },
+        {
+            Name: "International Roles",
+            Link: "prog.html"
+        },
+        {
+            Name: "Awards & Achievements",
+            Link: "awards.html"
+        },
+        {
+            Name: "Publications",
+            Link: "pub.html"
+        },
+        {
+            Name: "Gallery",
+            Link: "gallery.html"
+        }];
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let listItem = createElementAndAppend({
+            tagName: "li",
+            parentNode: listContainer
+        });
+        createElementAndAppend({
+            tagName: "a",
+            innerText: item.Name,
+            href: item.Link,
+            parentNode: listItem
+        });
+    }
+}
+
+function addSidePanel() {
+    let sidePanelContainer = document.getElementById('sidePanel');
+    let header = createElementAndAppend({
+        tagName: "h2",
+        innerText: "Other Contributions",
+        parentNode: sidePanelContainer
+    });
+    let listContainer = createElementAndAppend({
+        tagName: "ul",
+        parentNode: sidePanelContainer
+    });
+    let items = [
+        {
+            Name: "Technology Transferred",
+            Link: "index.html"
+        },
+        {
+            Name: "Invited Talks",
+            Link: "roles.html"
+        },
+        {
+            Name: "Memberships",
+            Link: "prog.html"
+        },
+        {
+            Name: "Student Development",
+            Link: "awards.html"
+        },
+        {
+            Name: "Large Scale Infrastructure Development",
+            Link: "pub.html"
+        }];
+    for (let i = 0; i < items.length; i++) {
+        let item = items[i];
+        let listItem = createElementAndAppend({
+            tagName: "li",
+            parentNode: listContainer
+        });
+        createElementAndAppend({
+            tagName: "a",
+            innerText: item.Name,
+            href: item.Link,
+            parentNode: listItem
+        });
+    }
 }
 
 function addFooter() {
@@ -39,8 +132,7 @@ function addFooter() {
     let footerInfo = createElementAndAppend({
         tagName: "p",
         innerHTML: PersonalData.Name +
-            "<br>" + PersonalData.Position +
-            "<br>" + PersonalData.Organisation +
+            "<br>" + PersonalData.CurrentPosition +
             "<br> Ph:" + PersonalData.Phone +
             "<br><a href='mailto:" + PersonalData.Email + "'> Email:" + PersonalData.Email + "</a>",
         parentNode: footerContainer
@@ -52,7 +144,6 @@ function addFooter() {
         parentNode: footerContainer
     })
 }
-
 
 
 /**
