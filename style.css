@@ -51,10 +51,6 @@ img {
 /** END wrapper **/
 
 /** BEGIN header **/
-#header {
-
-}
-
 #header ul {
     list-style-type: none;
 
@@ -95,10 +91,6 @@ img {
 #header .ad468x60 {
     float: right;
     padding-top: 40px;
-}
-
-#header {
-
 }
 
 /** END header **/
