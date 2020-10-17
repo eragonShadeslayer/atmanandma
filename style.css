@@ -442,33 +442,12 @@ td {
 }
 
 /********* gallery **********/
-.gallery {
-    margin: 20px 40px;
-
-    max-width: 100%;
-    height: auto;
-
-}
-
-.gallery img {
-    transition: 1s;
-    padding: 5px;
-    width: 40%;
-    max-width: 280px;
-    height: 170px;
-
-}
-
-.gallery h2 {
+.gallery-header {
     text-align: center;
     background: -webkit-linear-gradient(#1E90FF, #191970);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-}
-
-.gallery img:hover {
-    transform: scale(1.1);
 }
 
 #myBtn {
