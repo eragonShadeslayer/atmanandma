@@ -20,12 +20,13 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
     color: #3C4C16;
 }
 
 a:hover {
     text-decoration: underline;
+    color: blue;
 }
 
 img {
@@ -87,9 +88,7 @@ img {
 }
 
 #header ul li:hover {
-
-
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 
@@ -454,7 +453,8 @@ td {
 .gallery img {
     transition: 1s;
     padding: 5px;
-    width: 280px;
+    width: 40%;
+    max-width: 280px;
     height: 170px;
 
 }
