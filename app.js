@@ -1,3 +1,5 @@
+/** Load Functions **/
+
 function addProfilePanel() {
     let profilePanel = document.getElementById('profilePanel');
     let imageContainer = createElementAndAppend({
@@ -50,7 +52,7 @@ function addHeaderPanel() {
         },
         {
             Name: "Awards & Achievements",
-            Link: "awards.html"
+            Link: "awards.html",
         },
         {
             Name: "Publications",
@@ -66,17 +68,18 @@ function addHeaderPanel() {
             tagName: "li",
             parentNode: listContainer
         });
-        createElementAndAppend({
+        let linkItem = createElementAndAppend({
             tagName: "a",
             innerText: item.Name,
             href: item.Link,
             parentNode: listItem
         });
+        addActiveForPanelLink(linkItem);
     }
 }
 
 function addSidePanel() {
-    let sidePanelContainer = document.getElementById('sidePanel');
+    let sidePanelContainer = document.getElementById('sidebar');
     let header = createElementAndAppend({
         tagName: "h2",
         innerText: "Other Contributions",
@@ -89,23 +92,23 @@ function addSidePanel() {
     let items = [
         {
             Name: "Technology Transferred",
-            Link: "index.html"
+            Link: "tech.html"
         },
         {
             Name: "Invited Talks",
-            Link: "roles.html"
+            Link: "talks.html"
         },
         {
             Name: "Memberships",
-            Link: "prog.html"
+            Link: "ships.html"
         },
         {
             Name: "Student Development",
-            Link: "awards.html"
+            Link: "deve.html"
         },
         {
             Name: "Large Scale Infrastructure Development",
-            Link: "pub.html"
+            Link: "large.html"
         }];
     for (let i = 0; i < items.length; i++) {
         let item = items[i];
@@ -113,12 +116,13 @@ function addSidePanel() {
             tagName: "li",
             parentNode: listContainer
         });
-        createElementAndAppend({
+        let linkItem = createElementAndAppend({
             tagName: "a",
             innerText: item.Name,
             href: item.Link,
             parentNode: listItem
         });
+        addActiveForPanelLink(linkItem);
     }
 }
 
@@ -145,6 +149,14 @@ function addFooter() {
     })
 }
 
+/** Event Listeners **/
+
+function addActiveForPanelLink(linkItem) {
+    let pathname = document.location.pathname;
+    if (pathname === linkItem.pathname) {
+        linkItem.parentNode.classList.add('active');
+    }
+}
 
 /**
  * Method that creates then appends an HTML element to the provided parent node.
@@ -194,4 +206,6 @@ window.addEventListener('load', onLoad);
 function onLoad() {
     addProfilePanel();
     addFooter();
+    addHeaderPanel();
+    addSidePanel();
 }
