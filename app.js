@@ -9,7 +9,7 @@ function addProfilePanel() {
     });
     let image = createElementAndAppend({
         tagName: "img",
-        src: "images/photo.jpg",
+        src: "media/images/photo.jpg",
         parentNode: imageContainer
     });
     let textContainer = createElementAndAppend({

@@ -5,8 +5,6 @@ deployment:
     - /bin/cp *.html $DEPLOYPATH
     - /bin/cp *.js $DEPLOYPATH
     - /bin/cp *.css $DEPLOYPATH
-    - /bin/cp -R images $DEPLOYPATH
+    - /bin/cp -R media/images $DEPLOYPATH
     - /bin/cp -R css $DEPLOYPATH
-    - /bin/cp -R js $DEPLOYPATH
-    - /bin/cp -R images1 $DEPLOYPATH
     - /bin/cp -a * $DEPLOYPATH
