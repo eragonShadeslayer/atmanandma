@@ -200,12 +200,12 @@ createElementAndAppend = function (data, position) {
 };
 
 
-// window.addEventListener('load', onLoad);
+window.addEventListener('load', onLoad);
 
 
-// function onLoad() {
+function onLoad() {
     addProfilePanel();
     addFooter();
     addHeaderPanel();
     addSidePanel();
-// }
+}
