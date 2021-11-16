@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/atmaaici/public_html/
+    - export DEPLOYPATH=/home/atmaezcf/public_html/
     - /bin/cp *.html $DEPLOYPATH
     - /bin/cp *.js $DEPLOYPATH
     - /bin/cp *.css $DEPLOYPATH
