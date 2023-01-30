@@ -1,4 +1,4 @@
-let PersonalData = {
+const PersonalData = {
     Title: "Contact",
     Name: "Dr.M.A.Atmanand",
     CurrentPosition: "Visiting Professor, Indian Institute of Technology, Madras - Chennai",

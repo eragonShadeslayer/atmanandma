@@ -1,8 +1,8 @@
 /** Load Functions **/
 
 function addProfilePanel() {
-    let profilePanel = document.getElementById('profilePanel');
-    let imageContainer = createElementAndAppend({
+    const profilePanel = document.getElementById('profilePanel');
+    const imageContainer = createElementAndAppend({
         tagName: "div",
         className: "thumb",
         parentNode: profilePanel
