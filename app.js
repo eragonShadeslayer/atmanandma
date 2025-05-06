@@ -185,8 +185,6 @@ function addFooter() {
       PersonalData.Name +
       "<br>" +
       PersonalData.CurrentPosition +
-      "<br> Ph:" +
-      PersonalData.Phone +
       "<br><a href='mailto:" +
       PersonalData.Email +
       "'> Email:" +
