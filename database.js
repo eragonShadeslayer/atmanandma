@@ -6,7 +6,7 @@ const PersonalData = {
   PreviousPosition: "Director (Retd.), National Institute of Ocean Technology",
   OtherRoles:
     "Chair, Marine Systems Panel, Naval Research Board, Defence Research and Development Organisation (DRDO), Govt. of India<br/>Former Chair-IOCINDIO, UNESCO",
-  Email: "atma@iitm.ac.in",
+  Email: "atma@doe.iitm.ac.in",
   TwitterHandle: "atmanandma",
   LinkedInHandle: "atmanand-m-a-331107a",
 };
