@@ -68,6 +68,46 @@ img {
   display: none;
 }
 
+/** Skip-to-content link (visible on keyboard focus) **/
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 2000;
+  background: var(--teal-700);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #ffffff;
+}
+
+/** Scroll reveal (JS adds .reveal, observer adds .reveal-visible) **/
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /** BEGIN header (sticky nav) **/
 #header {
   position: sticky;

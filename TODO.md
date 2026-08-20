@@ -25,7 +25,9 @@ Tracked as we go. Completed batches are marked with their commit.
 - [x] **Batch 5 — 404 + SEO files** (built, awaiting review): branded `404.html`
       with full site chrome (`<base href="/">` so assets resolve at any path depth,
       `noindex`), `robots.txt` referencing `sitemap.xml` (11 URLs).
-- [ ] **Batch 6 — Scroll-reveal animations** (optional): subtle fade-up on
-      cards via `IntersectionObserver`.
-- [ ] **Batch 7 — Semantic HTML5** (optional): `<header>/<main>/<nav>/<footer>`
-      landmarks + skip-to-content link.
+- [x] **Batch 6 — Scroll-reveal animations** (built, awaiting review): cards
+      fade up via `IntersectionObserver` (`initScrollReveal()` in `app.js`);
+      respects `prefers-reduced-motion`.
+- [x] **Batch 7 — Semantic HTML5** (built, awaiting review): `<header>/<main>/<aside>/<footer>`
+      landmarks on all 12 pages, `<nav>` wrapper in the injected header,
+      skip-to-content link + `tabindex="-1"` on `#content1`.

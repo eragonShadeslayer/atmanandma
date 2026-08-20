@@ -153,9 +153,14 @@ function addHeaderPanel() {
     parentNode: headerContainer,
   });
   toggleButton.setAttribute("aria-label", "Toggle navigation");
+  let navContainer = createElementAndAppend({
+    tagName: "nav",
+    parentNode: headerContainer,
+  });
+  navContainer.setAttribute("aria-label", "Main navigation");
   let listContainer = createElementAndAppend({
     tagName: "ul",
-    parentNode: headerContainer,
+    parentNode: navContainer,
   });
   let items = headerNavItems;
   for (let i = 0; i < items.length; i++) {
@@ -453,6 +458,29 @@ createElementAndAppend = function (data, position) {
 
 window.addEventListener("load", onLoad);
 
+function initScrollReveal() {
+  if (!("IntersectionObserver" in window)) return;
+  var targets = document.querySelectorAll(
+    "#content1 .post, #sidebar ul, .sidebar-contact",
+  );
+  if (!targets.length) return;
+  var observer = new IntersectionObserver(
+    function (entries) {
+      for (var j = 0; j < entries.length; j++) {
+        if (entries[j].isIntersecting) {
+          entries[j].target.classList.add("reveal-visible");
+          observer.unobserve(entries[j].target);
+        }
+      }
+    },
+    { threshold: 0.1 },
+  );
+  for (var i = 0; i < targets.length; i++) {
+    targets[i].classList.add("reveal");
+    observer.observe(targets[i]);
+  }
+}
+
 function onLoad() {
   addProfilePanel();
   addFooter();
@@ -460,4 +488,5 @@ function onLoad() {
   addSidePanel();
   addContactCard();
   addPublicationsFilter();
+  initScrollReveal();
 }
