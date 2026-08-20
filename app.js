@@ -262,6 +262,71 @@ function addContactCard() {
   });
 }
 
+function addPublicationsFilter() {
+  if (!/\/pub\.html$/.test(document.location.pathname)) return;
+  var post = document.querySelector("#content1 .post");
+  if (!post) return;
+  var filterWrap = createElementAndAppend(
+    {
+      tagName: "div",
+      className: "pub-filter",
+      parentNode: post,
+    },
+    "afterbegin"
+  );
+  var input = createElementAndAppend({
+    tagName: "input",
+    className: "pub-filter-input",
+    type: "search",
+    placeholder: "Filter publications & patents by title, journal, year...",
+    parentNode: filterWrap,
+  });
+  input.setAttribute("aria-label", "Filter publications and patents");
+  var count = createElementAndAppend({
+    tagName: "span",
+    className: "pub-filter-count",
+    parentNode: filterWrap,
+  });
+  var entries = post.querySelectorAll("p, li");
+  var sections = post.querySelectorAll("h2, h3");
+  var spacers = post.querySelectorAll("br");
+  input.addEventListener("input", function () {
+    var q = input.value.trim().toLowerCase();
+    var shown = 0;
+    for (var b = 0; b < spacers.length; b++) {
+      spacers[b].style.display = q ? "none" : "";
+    }
+    for (var i = 0; i < entries.length; i++) {
+      var match = !q || entries[i].textContent.toLowerCase().indexOf(q) !== -1;
+      entries[i].style.display = match ? "" : "none";
+      var isTopEntry =
+        entries[i].tagName === "LI" || entries[i].parentNode === post;
+      if (match && isTopEntry) shown++;
+    }
+    for (var s = 0; s < sections.length; s++) {
+      var hasVisible = false;
+      var node = sections[s].nextElementSibling;
+      while (node && node.tagName !== "H2" && node.tagName !== "H3") {
+        if (node.tagName === "P" && node.style.display !== "none") {
+          hasVisible = true;
+        } else if (node.tagName === "UL") {
+          var items = node.querySelectorAll("li");
+          for (var u = 0; u < items.length; u++) {
+            if (items[u].style.display !== "none") {
+              hasVisible = true;
+              break;
+            }
+          }
+        }
+        if (hasVisible) break;
+        node = node.nextElementSibling;
+      }
+      sections[s].style.display = hasVisible || !q ? "" : "none";
+    }
+    count.innerText = q ? shown + " of " + (entries.length - post.querySelectorAll("li p").length) + " entries shown" : "";
+  });
+}
+
 function addFooter() {
   let footerContainer = document.getElementById("footer");
   let grid = createElementAndAppend({
@@ -389,4 +454,5 @@ function onLoad() {
   addHeaderPanel();
   addSidePanel();
   addContactCard();
+  addPublicationsFilter();
 }

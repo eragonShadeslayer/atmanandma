@@ -711,6 +711,36 @@ td {
   }
 }
 
+/** Publications filter **/
+.pub-filter {
+  margin-bottom: 18px;
+}
+
+.pub-filter-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 18px;
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: var(--card-bg);
+  border: 2px solid var(--border);
+  border-radius: 999px;
+}
+
+.pub-filter-input:focus {
+  outline: none;
+  border-color: var(--teal-500);
+  box-shadow: 0 0 0 3px var(--teal-100);
+}
+
+.pub-filter-count {
+  display: block;
+  margin: 6px 4px 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
 /** Dark mode (follows OS setting) **/
 @media (prefers-color-scheme: dark) {
   :root {
@@ -748,5 +778,95 @@ td {
   #sidebar ul li a:hover {
     background: var(--teal-50);
     color: #5fd3e6;
+  }
+}
+
+/** Print **/
+@media print {
+  #header,
+  #sidebar,
+  #footer,
+  #myBtn,
+  .hero-cta,
+  .pub-filter,
+  .fotorama,
+  .youtube-player .play {
+    display: none;
+  }
+
+  body {
+    display: block;
+    min-height: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 12pt;
+  }
+
+  a {
+    color: #000000;
+  }
+
+  #wrapper,
+  #body {
+    display: block;
+    max-width: none;
+    padding: 0;
+  }
+
+  #profilePanel.hero,
+  #profilePanel.banner {
+    display: block;
+    background: none;
+    color: #000000;
+    box-shadow: none;
+    padding: 0 0 12pt;
+  }
+
+  #profilePanel .hero-roles,
+  #profilePanel.banner p {
+    color: #000000;
+  }
+
+  .hero-photo img {
+    max-width: 160px;
+  }
+
+  #profilePanel.banner .avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  #content1 .post {
+    box-shadow: none;
+    padding: 0;
+  }
+
+  #content1 .post h2,
+  #content1 .post h3 {
+    color: #000000;
+    border-left-color: #000000;
+  }
+
+  .button {
+    background: none;
+    color: #000000;
+    padding: 0;
+    border-radius: 0;
+    text-decoration: underline;
+  }
+
+  #content1 a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 90%;
+    color: #555555;
+  }
+
+  #content1 .post ul li,
+  .timeline-item {
+    page-break-inside: avoid;
+  }
+
+  .timeline {
+    border-left-color: #999999;
   }
 }
