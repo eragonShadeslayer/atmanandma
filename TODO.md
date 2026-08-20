@@ -16,12 +16,12 @@ Tracked as we go. Completed batches are marked with their commit.
 
 ## Pending
 
-- [x] **Batch 3 — Publications filter** (built, awaiting review): search box on
-      `pub.html` live-filters journal entries and patents, hides empty sections,
-      shows "N of M entries" count. Injected by `addPublicationsFilter()` in `app.js`.
-- [x] **Batch 4 — Print stylesheet** (built, awaiting review): `@media print`
-      rules strip nav/sidebar/footer/filter/CTAs, small portrait, black-on-white
-      text, external link URLs printed, no page-breaks inside entries.
+- [x] **Batch 3 — Publications filter** (`e939347`): search box on
+  `pub.html` live-filters journal entries and patents, hides empty sections,
+  shows "N of M entries" count. Injected by `addPublicationsFilter()` in `app.js`.
+- [x] **Batch 4 — Print stylesheet** (`e939347`): `@media print`
+  rules strip nav/sidebar/footer/filter/CTAs, small portrait, black-on-white
+  text, external link URLs printed, no page-breaks inside entries.
 - [ ] **Batch 5 — 404 + SEO files**: branded `404.html`, `robots.txt`,
       `sitemap.xml`.
 - [ ] **Batch 6 — Scroll-reveal animations** (optional): subtle fade-up on
