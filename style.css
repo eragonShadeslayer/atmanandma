@@ -717,6 +717,29 @@ td {
   }
 }
 
+/** 404 page **/
+.error-page {
+  text-align: center;
+}
+
+.error-code {
+  font-family: var(--font-head);
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: var(--teal-500);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+#content1 .error-page h2 {
+  border-left: none;
+  padding-left: 0;
+}
+
+#content1 .error-page p {
+  text-align: center;
+}
+
 /** Publications filter **/
 .pub-filter {
   margin-bottom: 18px;

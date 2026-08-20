@@ -17,13 +17,14 @@ Tracked as we go. Completed batches are marked with their commit.
 ## Pending
 
 - [x] **Batch 3 — Publications filter** (`e939347`): search box on
-  `pub.html` live-filters journal entries and patents, hides empty sections,
-  shows "N of M entries" count. Injected by `addPublicationsFilter()` in `app.js`.
+      `pub.html` live-filters journal entries and patents, hides empty sections,
+      shows "N of M entries" count. Injected by `addPublicationsFilter()` in `app.js`.
 - [x] **Batch 4 — Print stylesheet** (`e939347`): `@media print`
-  rules strip nav/sidebar/footer/filter/CTAs, small portrait, black-on-white
-  text, external link URLs printed, no page-breaks inside entries.
-- [ ] **Batch 5 — 404 + SEO files**: branded `404.html`, `robots.txt`,
-      `sitemap.xml`.
+      rules strip nav/sidebar/footer/filter/CTAs, small portrait, black-on-white
+      text, external link URLs printed, no page-breaks inside entries.
+- [x] **Batch 5 — 404 + SEO files** (built, awaiting review): branded `404.html`
+      with full site chrome (`<base href="/">` so assets resolve at any path depth,
+      `noindex`), `robots.txt` referencing `sitemap.xml` (11 URLs).
 - [ ] **Batch 6 — Scroll-reveal animations** (optional): subtle fade-up on
       cards via `IntersectionObserver`.
 - [ ] **Batch 7 — Semantic HTML5** (optional): `<header>/<main>/<nav>/<footer>`
