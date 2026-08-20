@@ -41,72 +41,123 @@ function initYouTubeVideos() {
 
 document.addEventListener("DOMContentLoaded", initYouTubeVideos);
 
+function isHomePage() {
+  var path = document.location.pathname;
+  return /\/index\.html$/.test(path) || /\/$/.test(path) || path === "";
+}
+
 function addProfilePanel() {
   const profilePanel = document.getElementById("profilePanel");
-  const imageContainer = createElementAndAppend({
-    tagName: "div",
-    className: "thumb",
-    parentNode: profilePanel,
-  });
-  let image = createElementAndAppend({
-    tagName: "img",
-    src: "media/images/photo.jpg",
-    parentNode: imageContainer,
-  });
-  let textContainer = createElementAndAppend({
-    tagName: "div",
-    className: "text",
-    parentNode: profilePanel,
-  });
-  let textHeader = createElementAndAppend({
-    tagName: "h2",
-    innerText: PersonalData.Name,
-    parentNode: textContainer,
-  });
-  let textContent = createElementAndAppend({
-    tagName: "p",
-    innerHTML:
-      PersonalData.CurrentPosition +
-      "<br>" +
-      PersonalData.PreviousPosition +
-      "<br>" +
-      PersonalData.OtherRoles,
-    parentNode: textContainer,
-  });
+  const rolesHtml =
+    PersonalData.CurrentPosition +
+    "<br>" +
+    PersonalData.PreviousPosition +
+    "<br>" +
+    PersonalData.OtherRoles;
+  if (isHomePage()) {
+    profilePanel.className = "hero";
+    let textWrap = createElementAndAppend({
+      tagName: "div",
+      className: "hero-text",
+      parentNode: profilePanel,
+    });
+    createElementAndAppend({
+      tagName: "h1",
+      innerText: PersonalData.Name,
+      parentNode: textWrap,
+    });
+    createElementAndAppend({
+      tagName: "p",
+      className: "hero-roles",
+      innerHTML: rolesHtml,
+      parentNode: textWrap,
+    });
+    let ctaWrap = createElementAndAppend({
+      tagName: "div",
+      className: "hero-cta",
+      parentNode: textWrap,
+    });
+    createElementAndAppend({
+      tagName: "a",
+      className: "button",
+      innerText: "View Publications",
+      href: "pub.html",
+      parentNode: ctaWrap,
+    });
+    createElementAndAppend({
+      tagName: "a",
+      className: "button button-outline",
+      innerText: "Photo Gallery",
+      href: "gallery.html",
+      parentNode: ctaWrap,
+    });
+    createElementAndAppend({
+      tagName: "a",
+      className: "button button-outline",
+      innerText: "Contact",
+      href: "mailto:" + PersonalData.Email,
+      parentNode: ctaWrap,
+    });
+    let photoWrap = createElementAndAppend({
+      tagName: "div",
+      className: "hero-photo",
+      parentNode: profilePanel,
+    });
+    createElementAndAppend({
+      tagName: "img",
+      src: "media/images/photo.jpg",
+      alt: PersonalData.Name,
+      parentNode: photoWrap,
+    });
+  } else {
+    profilePanel.className = "banner";
+    createElementAndAppend({
+      tagName: "img",
+      className: "avatar",
+      src: "media/images/avatar.jpg",
+      alt: PersonalData.Name,
+      parentNode: profilePanel,
+    });
+    let textWrap = createElementAndAppend({
+      tagName: "div",
+      parentNode: profilePanel,
+    });
+    createElementAndAppend({
+      tagName: "h1",
+      innerText: PersonalData.Name,
+      parentNode: textWrap,
+    });
+    createElementAndAppend({
+      tagName: "p",
+      innerHTML: rolesHtml,
+      parentNode: textWrap,
+    });
+  }
 }
+
+var headerNavItems = [
+  { Name: "Home", Link: "index.html" },
+  { Name: "National Roles", Link: "roles.html" },
+  { Name: "International Roles", Link: "prog.html" },
+  { Name: "Awards & Achievements", Link: "awards.html" },
+  { Name: "Publications", Link: "pub.html" },
+  { Name: "Gallery", Link: "gallery.html" },
+];
 
 function addHeaderPanel() {
   let headerContainer = document.getElementById("header");
+  let toggleButton = createElementAndAppend({
+    tagName: "button",
+    className: "nav-toggle",
+    innerHTML: "&#9776;",
+    parentNode: headerContainer,
+  });
+  toggleButton.setAttribute("aria-label", "Toggle navigation");
   let listContainer = createElementAndAppend({
     tagName: "ul",
     parentNode: headerContainer,
   });
-  let items = [
-    {
-      Name: "Home",
-      Link: "index.html",
-    },
-    {
-      Name: "National Roles",
-      Link: "roles.html",
-    },
-    {
-      Name: "International Roles",
-      Link: "prog.html",
-    },
-    {
-      Name: "Awards & Achievements",
-      Link: "awards.html",
-    },
-    {
-      Name: "Publications",
-      Link: "pub.html",
-    },
-    {
-      Name: "Gallery",
-      Link: "gallery.html",
-    },
-  ];
+  let items = headerNavItems;
   for (let i = 0; i < items.length; i++) {
     let item = items[i];
     let listItem = createElementAndAppend({
@@ -121,6 +172,9 @@ function addHeaderPanel() {
     });
     addActiveForPanelLink(linkItem);
   }
+  toggleButton.addEventListener("click", function () {
+    listContainer.classList.toggle("open");
+  });
 }
 
 function addSidePanel() {
@@ -172,28 +226,31 @@ function addSidePanel() {
   }
 }
 
-function addFooter() {
-  let footerContainer = document.getElementById("footer");
-  let header = createElementAndAppend({
+function addContactCard() {
+  let sidePanelContainer = document.getElementById("sidebar");
+  let card = createElementAndAppend({
+    tagName: "div",
+    className: "sidebar-contact",
+    parentNode: sidePanelContainer,
+  });
+  createElementAndAppend({
     tagName: "h2",
     innerText: PersonalData.Title,
-    parentNode: footerContainer,
+    parentNode: card,
   });
-  let footerInfo = createElementAndAppend({
+  createElementAndAppend({
     tagName: "p",
     innerHTML:
-      PersonalData.Name +
-      "<br>" +
-      PersonalData.CurrentPosition +
-      "<br><a href='mailto:" +
+      "<a href='mailto:" +
       PersonalData.Email +
-      "'> Email:" +
+      "'>" +
       PersonalData.Email +
       "</a>",
-    parentNode: footerContainer,
+    parentNode: card,
   });
-  let socialMediaContainer = createElementAndAppend({
-    tagName: "center",
+  createElementAndAppend({
+    tagName: "div",
+    className: "social",
     innerHTML:
       "<a target='_blank' href='https://twitter.com/" +
       PersonalData.TwitterHandle +
@@ -201,6 +258,63 @@ function addFooter() {
       "<a target='_blank' href='http://www.linkedin.com/in/" +
       PersonalData.LinkedInHandle +
       "' class='fa fa-linkedin'></a>",
+    parentNode: card,
+  });
+}
+
+function addFooter() {
+  let footerContainer = document.getElementById("footer");
+  let grid = createElementAndAppend({
+    tagName: "div",
+    className: "footer-grid",
+    parentNode: footerContainer,
+  });
+  let aboutCol = createElementAndAppend({
+    tagName: "div",
+    className: "footer-col",
+    parentNode: grid,
+  });
+  createElementAndAppend({
+    tagName: "h2",
+    innerText: PersonalData.Name,
+    parentNode: aboutCol,
+  });
+  createElementAndAppend({
+    tagName: "p",
+    innerHTML:
+      PersonalData.CurrentPosition + "<br>" + PersonalData.PreviousPosition,
+    parentNode: aboutCol,
+  });
+  let linksCol = createElementAndAppend({
+    tagName: "div",
+    className: "footer-col",
+    parentNode: grid,
+  });
+  createElementAndAppend({
+    tagName: "h3",
+    innerText: "Quick Links",
+    parentNode: linksCol,
+  });
+  let linksList = createElementAndAppend({
+    tagName: "ul",
+    parentNode: linksCol,
+  });
+  for (let i = 0; i < headerNavItems.length; i++) {
+    let listItem = createElementAndAppend({
+      tagName: "li",
+      parentNode: linksList,
+    });
+    createElementAndAppend({
+      tagName: "a",
+      innerText: headerNavItems[i].Name,
+      href: headerNavItems[i].Link,
+      parentNode: listItem,
+    });
+  }
+  createElementAndAppend({
+    tagName: "div",
+    className: "footer-bottom",
+    innerHTML: "&copy; " + new Date().getFullYear() + " " + PersonalData.Name,
     parentNode: footerContainer,
   });
 }
@@ -211,6 +325,7 @@ function addActiveForPanelLink(linkItem) {
   let pathname = document.location.pathname;
   if (pathname === linkItem.pathname) {
     linkItem.parentNode.classList.add("active");
+    linkItem.setAttribute("aria-current", "page");
   }
 }
 
@@ -273,4 +388,5 @@ function onLoad() {
   addFooter();
   addHeaderPanel();
   addSidePanel();
+  addContactCard();
 }

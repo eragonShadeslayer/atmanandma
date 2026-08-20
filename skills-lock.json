@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "m3-web-vanilla": {
+      "source": "shelbeely/shelbeely-agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/m3-web-vanilla/SKILL.md",
+      "computedHash": "9be49c0c2349cd1f3e216d348e187cd713807038f42ad5e4fea865521cf1a283"
+    }
+  }
+}
