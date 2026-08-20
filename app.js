@@ -9,13 +9,13 @@ function labnolIframe(div) {
   var iframe = document.createElement("iframe");
   iframe.setAttribute(
     "src",
-    "https://www.youtube.com/embed/" + div.dataset.id + "?autoplay=1&rel=0"
+    "https://www.youtube.com/embed/" + div.dataset.id + "?autoplay=1&rel=0",
   );
   iframe.setAttribute("frameborder", "0");
   iframe.setAttribute("allowfullscreen", "1");
   iframe.setAttribute(
     "allow",
-    "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture",
   );
   div.parentNode.replaceChild(iframe, div);
 }
@@ -272,7 +272,7 @@ function addPublicationsFilter() {
       className: "pub-filter",
       parentNode: post,
     },
-    "afterbegin"
+    "afterbegin",
   );
   var input = createElementAndAppend({
     tagName: "input",
@@ -323,7 +323,12 @@ function addPublicationsFilter() {
       }
       sections[s].style.display = hasVisible || !q ? "" : "none";
     }
-    count.innerText = q ? shown + " of " + (entries.length - post.querySelectorAll("li p").length) + " entries shown" : "";
+    count.innerText = q
+      ? shown +
+        " of " +
+        (entries.length - post.querySelectorAll("li p").length) +
+        " entries shown"
+      : "";
   });
 }
 
@@ -438,7 +443,7 @@ createElementAndAppend = function (data, position) {
   if (data.eventListener)
     element.addEventListener(
       data.eventListenerType || "click",
-      data.eventListener
+      data.eventListener,
     );
   if (data.parentNode)
     data.parentNode.insertAdjacentElement(position || "beforeend", element);

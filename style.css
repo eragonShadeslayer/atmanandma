@@ -392,7 +392,9 @@ td {
   text-decoration: none;
   font-weight: 600;
   font-size: 0.95rem;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 #sidebar ul li a:hover {
@@ -513,7 +515,9 @@ td {
   line-height: 1;
   border-radius: 50%;
   text-decoration: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .fa:hover {
@@ -561,7 +565,9 @@ td {
   font-size: 0.9rem;
   margin: 4px 2px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
 }
 
 .button:hover {
