@@ -26,6 +26,8 @@ Personal website for Dr. M.A. Atmanand. Plain HTML/CSS/JS — **no build system,
 
 ## Conventions
 
+- `TODO.md` tracks completed and pending improvement batches; update it whenever a batch is finished or a new one is planned.
+
 - Plain HTML5 (`<!DOCTYPE html>`, `<html lang="en">`), plain CSS, framework-free JS in `app.js` (global functions, no modules). Match the existing style; don't add frameworks or preprocessors.
 - Font Awesome 4.7 and (on gallery.html) Fotorama 4.6.4 + jQuery load from CDNs. Keep them as CDN links.
 - `media/images/` holds image assets.
