@@ -105,7 +105,7 @@ function addProfilePanel() {
     });
     createElementAndAppend({
       tagName: "img",
-      src: "media/images/hero.jpg",
+      src: "media/images/photo.jpeg",
       alt: PersonalData.Name,
       parentNode: photoWrap,
     });
