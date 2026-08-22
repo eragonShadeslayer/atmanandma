@@ -1,6 +1,6 @@
 const PersonalData = {
   Title: "Contact",
-  Name: "Dr.M.A.Atmanand",
+  Name: "Dr. M. A. Atmanand",
   CurrentPosition:
     "Adjunct Professor, Indian Institute of Technology, Madras - Chennai<br/>Visiting Professor at the National Institute of Technology (NIT), Calicut",
   PreviousPosition: "Director (Retd.), National Institute of Ocean Technology",

@@ -337,63 +337,6 @@ function addPublicationsFilter() {
   });
 }
 
-function addFooter() {
-  let footerContainer = document.getElementById("footer");
-  let grid = createElementAndAppend({
-    tagName: "div",
-    className: "footer-grid",
-    parentNode: footerContainer,
-  });
-  let aboutCol = createElementAndAppend({
-    tagName: "div",
-    className: "footer-col",
-    parentNode: grid,
-  });
-  createElementAndAppend({
-    tagName: "h2",
-    innerText: PersonalData.Name,
-    parentNode: aboutCol,
-  });
-  createElementAndAppend({
-    tagName: "p",
-    innerHTML:
-      PersonalData.CurrentPosition + "<br>" + PersonalData.PreviousPosition,
-    parentNode: aboutCol,
-  });
-  let linksCol = createElementAndAppend({
-    tagName: "div",
-    className: "footer-col",
-    parentNode: grid,
-  });
-  createElementAndAppend({
-    tagName: "h3",
-    innerText: "Quick Links",
-    parentNode: linksCol,
-  });
-  let linksList = createElementAndAppend({
-    tagName: "ul",
-    parentNode: linksCol,
-  });
-  for (let i = 0; i < headerNavItems.length; i++) {
-    let listItem = createElementAndAppend({
-      tagName: "li",
-      parentNode: linksList,
-    });
-    createElementAndAppend({
-      tagName: "a",
-      innerText: headerNavItems[i].Name,
-      href: headerNavItems[i].Link,
-      parentNode: listItem,
-    });
-  }
-  createElementAndAppend({
-    tagName: "div",
-    className: "footer-bottom",
-    innerHTML: "&copy; " + new Date().getFullYear() + " " + PersonalData.Name,
-    parentNode: footerContainer,
-  });
-}
-
 /** Event Listeners **/
 
 function addActiveForPanelLink(linkItem) {
@@ -483,7 +426,6 @@ function initScrollReveal() {
 
 function onLoad() {
   addProfilePanel();
-  addFooter();
   addHeaderPanel();
   addSidePanel();
   addContactCard();
