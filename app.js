@@ -424,6 +424,164 @@ function initScrollReveal() {
   }
 }
 
+var pageCache = {};
+
+function isInternalUrl(url) {
+  try {
+    var parsed = new URL(url, location.href);
+    if (parsed.origin !== location.origin) return false;
+    if (parsed.pathname === location.pathname) return false;
+    if (parsed.hash && parsed.pathname === location.pathname) return false;
+    return /\.html$|\/$|^\/[^/]*$/.test(parsed.pathname);
+  } catch (e) {
+    return false;
+  }
+}
+
+function needsFullReload(url) {
+  try {
+    var parsed = new URL(url, location.href);
+    var targetIsGallery = /\/gallery\.html$/.test(parsed.pathname);
+    var currentIsGallery = /\/gallery\.html$/.test(location.pathname);
+    return targetIsGallery || currentIsGallery;
+  } catch (e) {
+    return true;
+  }
+}
+
+function prefetchPage(url) {
+  if (needsFullReload(url)) return;
+  if (pageCache[url]) return;
+  pageCache[url] = true;
+  fetch(url)
+    .then(function (response) {
+      if (!response.ok) return;
+      return response.text();
+    })
+    .then(function (html) {
+      if (html) pageCache[url] = html;
+    })
+    .catch(function () {
+      pageCache[url] = false;
+    });
+}
+
+function updateActiveNavLinks() {
+  var links = document.querySelectorAll(
+    "#header ul li a, #sidebar ul li a"
+  );
+  for (var i = 0; i < links.length; i++) {
+    links[i].parentNode.classList.remove("active");
+    links[i].removeAttribute("aria-current");
+    addActiveForPanelLink(links[i]);
+  }
+}
+
+function updateDocumentTitle(doc) {
+  var newTitle = doc.querySelector("title");
+  if (newTitle && newTitle.innerText) {
+    document.title = newTitle.innerText;
+  }
+}
+
+function swapContent(doc) {
+  var newPost = doc.querySelector("#content1 .post");
+  var currentPost = document.querySelector("#content1 .post");
+  if (newPost && currentPost) {
+    currentPost.innerHTML = newPost.innerHTML;
+  }
+}
+
+function refreshProfilePanel() {
+  var profilePanel = document.getElementById("profilePanel");
+  profilePanel.className = "";
+  profilePanel.innerHTML = "";
+  addProfilePanel();
+}
+
+function loadPage(url, pushState) {
+  if (needsFullReload(url)) {
+    location.href = url;
+    return;
+  }
+
+  var profilePanel = document.getElementById("profilePanel");
+  var content1 = document.getElementById("content1");
+  profilePanel.classList.add("is-loading");
+  content1.classList.add("is-loading");
+
+  function finish(html) {
+    var parser = new DOMParser();
+    var doc = parser.parseFromString(html, "text/html");
+    updateDocumentTitle(doc);
+    swapContent(doc);
+    if (pushState) history.pushState({ url: url }, "", url);
+    refreshProfilePanel();
+    updateActiveNavLinks();
+    addPublicationsFilter();
+    initScrollReveal();
+    initYouTubeVideos();
+    window.scrollTo(0, 0);
+    setTimeout(function () {
+      profilePanel.classList.remove("is-loading");
+      content1.classList.remove("is-loading");
+    }, 50);
+  }
+
+  if (typeof pageCache[url] === "string") {
+    finish(pageCache[url]);
+    return;
+  }
+
+  fetch(url)
+    .then(function (response) {
+      if (!response.ok) throw new Error("Failed to load " + url);
+      return response.text();
+    })
+    .then(function (html) {
+      pageCache[url] = html;
+      finish(html);
+    })
+    .catch(function () {
+      profilePanel.classList.remove("is-loading");
+      content1.classList.remove("is-loading");
+      location.href = url;
+    });
+}
+
+function initRouter() {
+  document.addEventListener("click", function (event) {
+    var link = event.target.closest("a");
+    if (!link) return;
+    if (link.getAttribute("target") === "_blank") return;
+    if (link.getAttribute("href") && link.getAttribute("href").indexOf("mailto:") === 0) return;
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.button !== 0) return;
+    var url = link.getAttribute("href");
+    if (!url || !isInternalUrl(url)) return;
+    event.preventDefault();
+    loadPage(url, true);
+  });
+
+  document.addEventListener("mouseover", function (event) {
+    var link = event.target.closest("a");
+    if (!link) return;
+    var url = link.getAttribute("href");
+    if (url && isInternalUrl(url)) prefetchPage(url);
+  });
+
+  document.addEventListener("focusin", function (event) {
+    var link = event.target.closest("a");
+    if (!link) return;
+    var url = link.getAttribute("href");
+    if (url && isInternalUrl(url)) prefetchPage(url);
+  });
+
+  window.addEventListener("popstate", function (event) {
+    var url = event.state && event.state.url ? event.state.url : location.href;
+    loadPage(url, false);
+  });
+}
+
 function onLoad() {
   addProfilePanel();
   addHeaderPanel();
@@ -431,4 +589,5 @@ function onLoad() {
   addContactCard();
   addPublicationsFilter();
   initScrollReveal();
+  initRouter();
 }

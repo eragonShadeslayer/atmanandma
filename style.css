@@ -189,6 +189,19 @@ img {
   top: 70px;
 }
 
+#profilePanel,
+#content1 {
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+#profilePanel.is-loading,
+#content1.is-loading {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
 /** END body layout **/
 
 /** BEGIN profilePanel : hero (home) **/
