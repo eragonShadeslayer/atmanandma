@@ -1,5 +1,8 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/atmaezcf/public_html
-    - /bin/rsync -av --delete --exclude='.git*' --exclude='.cpanel.yml' ./ $DEPLOYPATH/
+    - export DEPLOYPATH=/home/atmaezcf/public_html/
+    - /bin/cp *.html $DEPLOYPATH
+    - /bin/cp *.js $DEPLOYPATH
+    - /bin/cp *.css $DEPLOYPATH
+    - /bin/cp -r media $DEPLOYPATH
