@@ -31,7 +31,9 @@ body {
   font-size: 16px;
   line-height: 1.65;
   color: var(--text);
-  background: var(--page-bg);
+  background:
+    linear-gradient(180deg, rgba(14, 50, 60, 0.35) 0%, rgba(14, 50, 60, 0.55) 100%),
+    url("media/images/background.jpeg") center / cover no-repeat fixed;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
