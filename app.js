@@ -438,19 +438,7 @@ function isInternalUrl(url) {
   }
 }
 
-function needsFullReload(url) {
-  try {
-    var parsed = new URL(url, location.href);
-    var targetIsGallery = /\/gallery\.html$/.test(parsed.pathname);
-    var currentIsGallery = /\/gallery\.html$/.test(location.pathname);
-    return targetIsGallery || currentIsGallery;
-  } catch (e) {
-    return true;
-  }
-}
-
 function prefetchPage(url) {
-  if (needsFullReload(url)) return;
   if (pageCache[url]) return;
   pageCache[url] = true;
   fetch(url)
@@ -500,11 +488,6 @@ function refreshProfilePanel() {
 }
 
 function loadPage(url, pushState) {
-  if (needsFullReload(url)) {
-    location.href = url;
-    return;
-  }
-
   var profilePanel = document.getElementById("profilePanel");
   var content1 = document.getElementById("content1");
   profilePanel.classList.add("is-loading");
@@ -521,6 +504,7 @@ function loadPage(url, pushState) {
     addPublicationsFilter();
     initScrollReveal();
     initYouTubeVideos();
+    initGallery();
     window.scrollTo(0, 0);
     setTimeout(function () {
       profilePanel.classList.remove("is-loading");
@@ -582,6 +566,93 @@ function initRouter() {
   });
 }
 
+function initGallery() {
+  var carousel = document.querySelector(".gallery-carousel");
+  if (!carousel) return;
+
+  var main = carousel.querySelector(".gallery-main");
+  var mainImg = carousel.querySelector(".gallery-main-img");
+  var caption = carousel.querySelector(".gallery-caption");
+  var fullscreenCaption = carousel.querySelector(".gallery-fullscreen-caption");
+  var prevBtn = carousel.querySelector(".gallery-prev");
+  var nextBtn = carousel.querySelector(".gallery-next");
+  var fullscreenBtn = carousel.querySelector(".gallery-fullscreen");
+  var thumbs = carousel.querySelectorAll(".gallery-thumbs .gallery-thumb");
+  if (!main || !mainImg || !caption || !prevBtn || !nextBtn || thumbs.length === 0) return;
+
+  var currentIndex = 0;
+  var items = [];
+  for (var i = 0; i < thumbs.length; i++) {
+    var img = thumbs[i].querySelector("img");
+    items.push({
+      src: img ? img.getAttribute("src") : "",
+      alt: img ? img.getAttribute("alt") : "",
+      caption: img ? img.getAttribute("alt") : "",
+    });
+  }
+
+  function show(index) {
+    currentIndex = index;
+    var item = items[index];
+    mainImg.src = item.src;
+    mainImg.alt = item.alt;
+    caption.innerText = item.caption;
+    if (fullscreenCaption) fullscreenCaption.innerText = item.caption;
+
+    for (var i = 0; i < thumbs.length; i++) {
+      thumbs[i].classList.toggle("active", i === index);
+    }
+
+    thumbs[index].scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }
+
+  function prev() {
+    show((currentIndex - 1 + items.length) % items.length);
+  }
+
+  function next() {
+    show((currentIndex + 1) % items.length);
+  }
+
+  prevBtn.addEventListener("click", prev);
+  nextBtn.addEventListener("click", next);
+
+  if (fullscreenBtn) {
+    fullscreenBtn.addEventListener("click", function () {
+      main.classList.toggle("is-fullscreen");
+      document.body.style.overflow = main.classList.contains("is-fullscreen")
+        ? "hidden"
+        : "";
+    });
+  }
+
+  for (var i = 0; i < thumbs.length; i++) {
+    (function (index) {
+      thumbs[index].addEventListener("click", function () {
+        show(index);
+      });
+    })(i);
+  }
+
+  carousel.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") prev();
+    if (e.key === "ArrowRight") next();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && main.classList.contains("is-fullscreen")) {
+      main.classList.remove("is-fullscreen");
+      document.body.style.overflow = "";
+    }
+  });
+
+  show(0);
+}
+
 function onLoad() {
   addProfilePanel();
   addHeaderPanel();
@@ -589,5 +660,6 @@ function onLoad() {
   addContactCard();
   addPublicationsFilter();
   initScrollReveal();
+  initGallery();
   initRouter();
 }
