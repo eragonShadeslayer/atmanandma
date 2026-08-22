@@ -1,6 +1,5 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/atmaezcf/public_html
-    - /bin/cp -f *.* $DEPLOYPATH/
-    - /bin/cp -rf media $DEPLOYPATH/
+    - /bin/cp -f *.* /home/atmaezcf/public_html/
+    - /bin/cp -rf media /home/atmaezcf/public_html/
