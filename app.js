@@ -51,9 +51,10 @@ function addProfilePanel() {
   const rolesHtml =
     PersonalData.CurrentPosition +
     "<br>" +
-    PersonalData.PreviousPosition +
-    "<br>" +
-    PersonalData.OtherRoles;
+    PersonalData.PreviousPosition;
+    //  +
+    // "<br>" +
+    // PersonalData.OtherRoles;
   if (isHomePage()) {
     profilePanel.className = "hero";
     let textWrap = createElementAndAppend({
